@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import tr.edu.ege.userservice.exception.ServiceException;
+import tr.edu.ege.userservice.exception.UserError;
 import tr.edu.ege.userservice.security.JwtUtils;
 import tr.edu.ege.userservice.dto.JwtResponse;
 import tr.edu.ege.userservice.dto.SignInRequest;
@@ -41,10 +43,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public UserDto signUp(SignupRequest signUpRequest) {
         if (Boolean.TRUE.equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Username is already taken!");
+            throw new ServiceException(UserError.USERNAME_ALREADY_EXISTS);
         }
         if (Boolean.TRUE.equals(userRepository.existsByEmail(signUpRequest.getEmail()))) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Email is already taken!");
+            throw new ServiceException(UserError.EMAIL_ALREADY_EXISTS);
         }
         User user = User.builder()
                 .name(signUpRequest.getName())
