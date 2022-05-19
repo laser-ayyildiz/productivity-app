@@ -6,37 +6,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class RegisterDto {
-
-    @NotNull
-    @NotEmpty
-    @Size(min = 2, max = 100)
-    private String name;
-
-    @NotNull
-    @NotEmpty
-    @Size(min = 2, max = 100)
-    private String surname;
+public class SignInRequest {
 
     @NotNull
     @NotEmpty
     @Size(min = 2, max = 50)
     private String username;
-
-    @NotNull
-    @NotEmpty
-    @Email
-    private String email;
 
     @NotNull
     @NotEmpty

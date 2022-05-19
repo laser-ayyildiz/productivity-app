@@ -1,12 +1,13 @@
 package tr.edu.ege.userservice.service;
 
-import tr.edu.ege.userservice.dto.LoginDto;
-import tr.edu.ege.userservice.dto.RegisterDto;
+import tr.edu.ege.userservice.dto.JwtResponse;
+import tr.edu.ege.userservice.dto.SignInRequest;
+import tr.edu.ege.userservice.dto.SignupRequest;
 import tr.edu.ege.userservice.dto.UserDto;
 
 public interface AuthenticationService {
 
-    UserDto login(LoginDto loginDto);
+    JwtResponse signIn(SignInRequest signInRequest);
 
-    UserDto register(RegisterDto registerDto);
+    UserDto signUp(SignupRequest signupRequest);
 }
