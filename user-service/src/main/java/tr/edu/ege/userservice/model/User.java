@@ -54,9 +54,4 @@ public class User {
     @LastModifiedDate
     @Builder.Default
     private Date updatedAt = new Date();
-
-    @Builder.Default
-    private Boolean isDeleted = Boolean.FALSE;
-
-    private Date deletedAt;
 }

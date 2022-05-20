@@ -1,23 +1,21 @@
 package tr.edu.ege.userservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-import tr.edu.ege.userservice.exception.ServiceException;
-import tr.edu.ege.userservice.exception.UserError;
-import tr.edu.ege.userservice.security.JwtUtils;
 import tr.edu.ege.userservice.dto.JwtResponse;
 import tr.edu.ege.userservice.dto.SignInRequest;
 import tr.edu.ege.userservice.dto.SignupRequest;
 import tr.edu.ege.userservice.dto.UserDto;
+import tr.edu.ege.userservice.exception.ServiceException;
+import tr.edu.ege.userservice.exception.UserError;
 import tr.edu.ege.userservice.model.User;
 import tr.edu.ege.userservice.repository.UserRepository;
+import tr.edu.ege.userservice.security.JwtUtils;
 import tr.edu.ege.userservice.security.MyUserDetails;
 import tr.edu.ege.userservice.service.AuthenticationService;
 
