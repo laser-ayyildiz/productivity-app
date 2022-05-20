@@ -3,6 +3,7 @@ package tr.edu.ege.userservice.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tr.edu.ege.userservice.dto.UserDto;
+import tr.edu.ege.userservice.dto.UserUpdateDto;
 import tr.edu.ege.userservice.exception.ServiceException;
 import tr.edu.ege.userservice.exception.UserError;
 import tr.edu.ege.userservice.model.User;
@@ -25,5 +26,14 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ServiceException(UserError.NOT_FOUND));
         userRepository.delete(user);
+    }
+
+    @Override
+    public UserDto update(Long id, UserUpdateDto userUpdateDto) {
+        User user = userRepository.findById(id).orElseThrow(() -> new ServiceException(UserError.NOT_FOUND));
+        user.setName(userUpdateDto.getName());
+        user.setSurname(userUpdateDto.getSurname());
+        user = userRepository.save(user);
+        return UserDto.of(user);
     }
 }
