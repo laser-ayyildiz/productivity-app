@@ -1,4 +1,4 @@
-package tr.edu.ege.userservice.dto;
+package tr.edu.ege.apigateway.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

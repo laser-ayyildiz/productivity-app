@@ -1,4 +1,4 @@
-package tr.edu.ege.userservice.security;
+package tr.edu.ege.apigateway.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

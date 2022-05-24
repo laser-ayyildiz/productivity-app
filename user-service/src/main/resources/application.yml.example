@@ -1,5 +1,5 @@
-app:
-  uri: /api/v1/user-service
+api:
+  version: v1
 
 server:
   port: 8081
@@ -14,10 +14,14 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
     healthcheck:
       enabled: true
+    fetch-registry: true
 
 spring:
   application:
     name: productivityApp-user-service
+  devtools:
+    restart:
+      enabled: true
   datasource:
     url: jdbc:mysql://localhost:DB_PORT/DB_NAME
     username: DB_USER

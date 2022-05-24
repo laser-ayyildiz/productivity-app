@@ -1,13 +1,13 @@
-package tr.edu.ege.userservice.service.impl;
+package tr.edu.ege.apigateway.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import tr.edu.ege.userservice.model.User;
-import tr.edu.ege.userservice.repository.UserRepository;
-import tr.edu.ege.userservice.security.MyUserDetails;
+import tr.edu.ege.apigateway.model.User;
+import tr.edu.ege.apigateway.repository.UserRepository;
+import tr.edu.ege.apigateway.security.MyUserDetails;
 
 @Service
 @RequiredArgsConstructor

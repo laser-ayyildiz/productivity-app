@@ -1,8 +1,8 @@
-package tr.edu.ege.userservice.config;
+package tr.edu.ege.apigateway.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,8 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import tr.edu.ege.userservice.security.AuthEntryPointJwt;
-import tr.edu.ege.userservice.security.AuthTokenFilter;
+import tr.edu.ege.apigateway.security.AuthEntryPointJwt;
+import tr.edu.ege.apigateway.security.AuthTokenFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -29,8 +29,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final AuthEntryPointJwt unauthorizedHandler;
     private final AuthTokenFilter authTokenFilter;
-    @Value("${app.uri}")
-    private String apiUri;
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("discUser").password("discPassword").roles("SYSTEM")
+                .and()
+                .withUser("admin").password("admin").roles("ADMIN")
+                .and()
+                .withUser("actuator").password("actuator").roles("ACTUATOR");
+    }
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -42,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers(apiUri + AUTH_URL).permitAll()
+                .antMatchers(AUTH_URL).permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }

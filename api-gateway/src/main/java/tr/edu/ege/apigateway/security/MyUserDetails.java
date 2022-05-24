@@ -1,9 +1,9 @@
-package tr.edu.ege.userservice.security;
+package tr.edu.ege.apigateway.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import tr.edu.ege.userservice.model.User;
+import tr.edu.ege.apigateway.model.User;
 
 import java.util.Collection;
 import java.util.Objects;
