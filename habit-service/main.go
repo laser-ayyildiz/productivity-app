@@ -10,6 +10,6 @@ import (
 func main() {
 	fmt.Println("Hello, World!")
 	router := router.Router()
-	fmt.Println("Starting server on port 8080")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	fmt.Println("Starting server on port 8000")
+	log.Fatal(http.ListenAndServe(":8000", router))
 }
