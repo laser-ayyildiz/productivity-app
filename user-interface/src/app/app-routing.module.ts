@@ -3,30 +3,31 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { route_paths } from './route_paths';
 import { TodoComponent } from './todo/todo.component';
 import { AuthGuard } from './_services/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: route_paths.DASHBOARD,
     pathMatch: 'full'
   },
   {
-    path: "login",
+    path: route_paths.LOGIN,
     component: LoginComponent
   },
   {
-    path: "register",
+    path: route_paths.REGISTER,
     component: RegisterComponent
   },
   {
-    path: "todo/:id",
+    path: route_paths.TODO,
     canActivate: [AuthGuard],
     component: TodoComponent
   },
   {
-    path: "dashboard",
+    path: route_paths.DASHBOARD,
     canActivate: [AuthGuard],
     component: DashboardComponent
   }
