@@ -19,7 +19,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService, private toastr: ToastrService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.router.navigate(["/dashboard"]);
+    }
+  }
 
   onSubmit(): void {
     const { username, password } = this.form;
@@ -28,7 +32,9 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveToken(data.jwtToken);
         this.tokenStorage.saveUser(new User(data.id, data.username));
         this.toastr.success('Successfully logged in!');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']).then(() => {
+          this.reloadPage();
+        });
       },
       error: err => {
         this.errorMessage = err.error.message;

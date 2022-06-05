@@ -12,7 +12,9 @@ export class TokenStorageService {
   constructor() { }
 
   signOut(): void {
-    window.sessionStorage.clear();
+    sessionStorage.removeItem('auth-token');
+    sessionStorage.removeItem('auth-user');
+    window.location.reload();
   }
 
   public saveToken(token: string): void {
