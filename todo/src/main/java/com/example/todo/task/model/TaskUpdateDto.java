@@ -18,7 +18,7 @@ import java.util.Date;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskUpdateDto  extends BaseEntity {
+public class TaskUpdateDto extends BaseEntity {
 
     @NotNull
     @Enumerated(EnumType.STRING)

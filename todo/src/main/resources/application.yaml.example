@@ -3,9 +3,9 @@ spring:
     livereload:
       enabled: true
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/todo
-    username: root
-    password: root
+    url: jdbc:mysql://127.0.0.1:DB_PORT/DB_NAME
+    username: DB_USER
+    password: DB_PASS
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -16,5 +16,8 @@ spring:
         show_sql: false
         format_sql: false
         globally_quoted_identifiers: true
-application:
-  base-path: api/v1
+api:
+  version: api/v1
+
+kafka:
+  bootstrapAddress:
