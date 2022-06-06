@@ -19,14 +19,19 @@ func InsertHabit(responseWriter http.ResponseWriter, req *http.Request) {
 }
 func UpdateHabit(responseWriter http.ResponseWriter, req *http.Request) {
 	setHeaders(responseWriter)
-	responseWriter.Header().Set("Access-Control-Allow-Methods", "POST")
+	responseWriter.Header().Set("Access-Control-Allow-Methods", "PUT")
 
 	log.Println("Updating habit")
 }
 func DeleteHabit(responseWriter http.ResponseWriter, req *http.Request) {
 	setHeaders(responseWriter)
-	responseWriter.Header().Set("Access-Control-Allow-Methods", "POST")
+	responseWriter.Header().Set("Access-Control-Allow-Methods", "DELETE")
 
 	log.Println("Deleting habit")
 }
+func GetHabit(responseWriter http.ResponseWriter, req *http.Request) {
+	setHeaders(responseWriter)
+	responseWriter.Header().Set("Access-Control-Allow-Methods", "GET")
 
+	log.Println("Getting habit")
+}
