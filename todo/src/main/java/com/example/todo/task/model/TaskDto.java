@@ -27,6 +27,8 @@ public class TaskDto extends BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     private Priority priority;
     private boolean isRecursive;
+    @Enumerated(EnumType.STRING)
+    private TaskColor color;
 
     public static TaskDto of(Task task) {
         return TaskDto.builder()
@@ -40,6 +42,7 @@ public class TaskDto extends BaseEntity {
                 .isRecursive(task.getIsRecursive())
                 .createdDate(task.getCreatedDate())
                 .lastModifiedDate(task.getLastModifiedDate())
+                .color(task.getColor())
                 .build();
     }
 }

@@ -24,7 +24,9 @@ public class TaskCreateDto {
     private String description;
     @Builder.Default
     @Enumerated(EnumType.ORDINAL)
-    private Priority priority = Priority.COFFEA;
+    private Priority priority = Priority.COFFEE;
+    @Enumerated(EnumType.STRING)
+    private TaskColor color;
 
     @NotNull
     @Builder.Default

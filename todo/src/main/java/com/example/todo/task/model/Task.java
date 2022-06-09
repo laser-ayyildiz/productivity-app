@@ -42,6 +42,8 @@ public class Task extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Category category;
     private Boolean isRecursive;
+    @Enumerated(EnumType.STRING)
+    private TaskColor color;
 
     public static Task of(TaskCreateDto task, Long userId) {
         return Task.builder()
@@ -53,6 +55,7 @@ public class Task extends BaseEntity {
                 .priority(task.getPriority())
                 .deadline(task.getDeadline())
                 .isRecursive(task.isRecursive())
+                .color(task.getColor())
                 .build();
     }
 
@@ -68,6 +71,7 @@ public class Task extends BaseEntity {
                 .deadline(task.getDeadline())
                 .createdDate(createdDate)
                 .isRecursive(task.isRecursive())
+                .color(task.getColor())
                 .build();
 
     }
