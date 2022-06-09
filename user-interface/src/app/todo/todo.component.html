@@ -1,3 +1,11 @@
+<button
+  type="button"
+  class="btn btn-success mb-2"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  New Todo
+</button>
 <div class="row row-cols-1 row-cols-md-2 g-4">
   <div *ngFor="let todo of todos.content">
     <div class="col">
@@ -8,6 +16,153 @@
             {{ todo.description }}
           </p>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New TODO</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+          <!-- Title -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="title"><b>Title</b></label>
+            <input
+              name="title"
+              type="text"
+              id="title"
+              class="form-control"
+              [(ngModel)]="newTodo.title"
+              required
+              minlength="3"
+              maxlength="20"
+              #title="ngModel"
+              placeholder="Enter title"
+            />
+          </div>
+
+          <!-- Category -->
+          <div class="form-outline mb-3">
+            <label class="form-label" for="category"><b>Category</b></label>
+            <select
+              name="category"
+              type="text"
+              id="category"
+              class="form-control"
+              [(ngModel)]="newTodo.category"
+              required
+              minlength="3"
+              maxlength="20"
+              #category="ngModel"
+              placeholder="Enter category"
+            >
+              <option value="0">HOBBY</option>
+              <option value="1">WORK</option>
+              <option value="2">DAYWORK</option>
+              <option value="3">EXERECISE</option>
+            </select>
+          </div>
+
+          <!-- Deadline -->
+          <div class="form-outline mb-3">
+            <label class="form-label" for="deadline"><b>Deadline</b></label>
+            <input
+              name="deadline"
+              type="date"
+              id="deadline"
+              class="form-control"
+              [(ngModel)]="newTodo.deadline"
+              required
+              minlength="3"
+              maxlength="20"
+              #deadline="ngModel"
+              placeholder="Enter deadline"
+            />
+          </div>
+
+          <!-- Description -->
+          <div class="form-outline mb-3">
+            <label class="form-label" for="description"
+              ><b>Description</b></label
+            >
+            <textarea
+              name="description"
+              id="deadline"
+              class="form-control"
+              [(ngModel)]="newTodo.description"
+              required
+              minlength="3"
+              maxlength="20"
+              #description="ngModel"
+              placeholder="Enter description"
+            ></textarea>
+          </div>
+
+          <!-- Priority -->
+          <div class="form-outline mb-3">
+            <label class="form-label" for="priority"><b>Priority</b></label>
+            <select
+              name="priority"
+              id="priority"
+              class="form-control"
+              [(ngModel)]="newTodo.priority"
+              required
+              minlength="3"
+              maxlength="20"
+              #priority="ngModel"
+              placeholder="Enter priority"
+            >
+              <option value="0">COFFEE</option>
+              <option value="1">LOW</option>
+              <option value="2">MEDIUM</option>
+              <option value="3">HIGH</option>
+              <option value="4">CRITICAL</option>
+            </select>
+          </div>
+
+          <!-- Color -->
+          <div class="form-outline mb-3">
+            <label class="form-label" for="color"><b>Color</b></label>
+            <select
+              name="color"
+              type="text"
+              id="color"
+              class="form-control"
+              [(ngModel)]="newTodo.color"
+              required
+              #color="ngModel"
+              placeholder="Enter color"
+            >
+              <option value="0">PRIMARY</option>
+              <option value="1">SECONDARY</option>
+              <option value="2">DARK</option>
+              <option value="3">SUCCESS</option>
+              <option value="4">DANGER</option>
+              <option value="5">WARNING</option>
+            </select>
+          </div>
+
+          <div class="text-center text-lg-end">
+            <button class="btn btn-primary btn-lg">Create</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
