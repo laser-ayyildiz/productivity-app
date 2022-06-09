@@ -3,9 +3,9 @@ package db
 import (
 	"context"
 	"fmt"
-	"github.com/spf13/viper"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"habit-service/utils"
 	"sync"
 )
 
@@ -17,26 +17,9 @@ type MongoDBConn struct {
 
 var mongoDBConn *MongoDBConn
 
-func getDBEnv(variableName string) string {
-	viper.SetConfigFile("../.env")
-	err := viper.ReadInConfig()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	value, ok := viper.Get(variableName).(string)
-
-	if !ok {
-		fmt.Println("There is no value!")
-		return ""
-	} else {
-		return value
-	}
-}
-
 func init() {
-	dbUsername := getDBEnv("DB_USERNAME")
-	dbPassword := getDBEnv("DB_PASSWORD")
+	dbUsername := utils.GetEnv("DB_USERNAME")
+	dbPassword := utils.GetEnv("DB_PASSWORD")
 	connectionString := "mongodb+srv://" + dbUsername + ":" + dbPassword + "@habitcluster.lb261.mongodb.net/?retryWrites=true&w=majority"
 	clientOptions := options.Client().ApplyURI(connectionString)
 
