@@ -5,7 +5,7 @@ import { HabitComponent } from './habit/habit.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
-import { route_paths } from './route_paths';
+import { route_paths } from './_helpers/route_paths';
 import { TodoComponent } from './todo/todo.component';
 import { AuthGuard } from './_services/auth.guard';
 
