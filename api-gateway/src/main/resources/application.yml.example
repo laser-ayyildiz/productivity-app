@@ -30,6 +30,11 @@ zuul:
       serviceId: PRODUCTIVITYAPP-USER-SERVICE
       path: /user-service/**
       url: http://localhost:8081/v1/
+    todo-service:
+      stripPrefix: true
+      serviceId: PRODUCTIVITYAPP-TODO-SERVICE
+      path: /todo-service/**
+      url: http://localhost:8082/v1/
   strip-prefix: true
 
 eureka:
