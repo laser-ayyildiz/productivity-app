@@ -47,6 +47,7 @@ func GetHabit(habitID dto.HabitIDRequest) (model.Habit, error) {
 		log.Println("Could not to find!")
 		return model.Habit{}, err
 	}
-	log.Println("Habit is founded!")
+	result.ID = habitID.ID
+	log.Printf("Habit is founded %v", result)
 	return result, nil
 }
