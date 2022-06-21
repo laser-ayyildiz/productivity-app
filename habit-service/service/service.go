@@ -4,8 +4,10 @@ import (
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"habit-service/db"
 	"habit-service/dto"
+	"habit-service/model"
 	"habit-service/utils"
 	"log"
 	"time"
@@ -28,9 +30,23 @@ func InsertHabit(habit dto.HabitRequest) (*mongo.InsertOneResult, error) {
 
 	result, err := collection.InsertOne(context.TODO(), doc)
 	if err != nil {
-		log.Fatal("Could not to insert new habit!")
+		log.Println("Could not to insert new habit!")
 		return nil, err
 	}
 	log.Println("Habit is added!")
+	return result, nil
+}
+func GetHabit(habitID dto.HabitIDRequest) (model.Habit, error) {
+	filter := bson.D{{"_id", habitID.ID}}
+	opts := options.FindOne()
+
+	var result model.Habit
+	err := collection.FindOne(context.TODO(), filter, opts).Decode(&result)
+
+	if err != nil {
+		log.Println("Could not to find!")
+		return model.Habit{}, err
+	}
+	log.Println("Habit is founded!")
 	return result, nil
 }

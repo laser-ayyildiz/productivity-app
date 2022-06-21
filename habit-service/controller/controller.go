@@ -25,7 +25,9 @@ func InsertHabit(responseWriter http.ResponseWriter, req *http.Request) {
 
 	result, err := service.InsertHabit(newHabitReq)
 	if err != nil {
-		http.Error(responseWriter, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		error := dto.Error{Code: http.StatusInternalServerError, Message: "Habit not found"}
+		responseWriter.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(responseWriter).Encode(error)
 	}
 	responseWriter.WriteHeader(http.StatusCreated)
 	json.NewEncoder(responseWriter).Encode(result)
@@ -47,4 +49,15 @@ func GetHabit(responseWriter http.ResponseWriter, req *http.Request) {
 	responseWriter.Header().Set("Access-Control-Allow-Methods", "GET")
 
 	log.Println("Getting habit")
+
+	var habitID dto.HabitIDRequest
+	_ = json.NewDecoder(req.Body).Decode(&habitID)
+	habit, err := service.GetHabit(habitID)
+	if err != nil {
+		error := dto.Error{Code: http.StatusNotFound, Message: "Habit not found"}
+		json.NewEncoder(responseWriter).Encode(error)
+	} else {
+		responseWriter.WriteHeader(http.StatusOK)
+		json.NewEncoder(responseWriter).Encode(habit)
+	}
 }
