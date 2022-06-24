@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HabitComponent } from './habit/habit.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ProfileComponent } from './profile/profile.component';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { TodoService } from '../_services/todo.service';
+import { TodoService } from './todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -11,6 +11,8 @@ import { TodoService } from '../_services/todo.service';
 export class TodoComponent implements OnInit {
   errorMessage: string = "";
   todos: any = {}
+  page: number = 0;
+  total: number = 0;
   newTodo: any = {
     category: "",
     title: "",
@@ -24,9 +26,28 @@ export class TodoComponent implements OnInit {
   constructor(private route: ActivatedRoute, private todoService: TodoService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.todos = this.todoService.getAll().subscribe({
+    this.todos = this.fetchTodos();
+  }
+
+  onSubmit(): void {
+    const { category, title, habitId, deadline, description, priority, color } = this.newTodo;
+    this.todoService.create(category, title, habitId, deadline,
+      description, priority, color).subscribe({
+        next: data => {
+          this.fetchTodos();
+          this.toastr.success("New TODO created!");
+        },
+        error: err => {
+          this.errorMessage = err.error.message;
+        }
+      });
+  }
+
+  fetchTodos(page: number = 0, pageSize: number = 10) {
+    this.todoService.getAll(page, pageSize).subscribe({
       next: data => {
-        this.todos = data;
+        this.todos = data.content;
+        this.total = data.totalElements;
       },
       error: err => {
         this.errorMessage = err.error.message;
@@ -35,18 +56,8 @@ export class TodoComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    const { category, title, habitId, deadline, description, priority, color } = this.newTodo;
-    console.log("componentteyim")
-    this.todoService.create(category, title, habitId, deadline,
-      description, priority, color).subscribe({
-        next: data => {
-          console.log(data);
-        },
-        error: err => {
-          this.errorMessage = err.error.message;
-          this.toastr.error('Control your inputs!');
-        }
-      });
+  pageChangeEvent(event: number) {
+    this.page = event;
+    this.fetchTodos(this.page - 1, 10);
   }
 }

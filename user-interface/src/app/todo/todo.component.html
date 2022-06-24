@@ -7,7 +7,12 @@
   New Todo
 </button>
 <div class="row row-cols-1 row-cols-md-2 g-4">
-  <div *ngFor="let todo of todos.content">
+  <div
+    *ngFor="
+      let todo of todos
+        | paginate: { itemsPerPage: 10, currentPage: page, totalItems: total }
+    "
+  >
     <div class="col">
       <div class="card text-white bg-{{ todo.color.toLowerCase() }} mb-3">
         <div class="card-header">{{ todo.title }}</div>
@@ -19,6 +24,12 @@
       </div>
     </div>
   </div>
+</div>
+<style></style>
+<div class="pagination">
+  <pagination-controls
+    (pageChange)="pageChangeEvent($event)"
+  ></pagination-controls>
 </div>
 
 <div
