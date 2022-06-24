@@ -1,3 +1,14 @@
-<p>todo works!</p>
-<h1>{{id}}</h1>
-{{tempFunc()}}
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div *ngFor="let todo of todos.content">
+    <div class="col">
+      <div class="card text-white bg-{{ todo.color.toLowerCase() }} mb-3">
+        <div class="card-header">{{ todo.title }}</div>
+        <div class="card-body">
+          <p class="card-text">
+            {{ todo.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

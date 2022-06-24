@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../_services/token-storage.service';
-import { route_paths } from "../route_paths"
+import { route_paths } from "../_helpers/route_paths"
 
 @Component({
   selector: 'app-navbar',

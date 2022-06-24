@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { TodoService } from '../_services/todo.service';
 
 
 @Component({
@@ -8,17 +10,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit {
+  errorMessage: string = "";
 
-  id: Number = 0;
-  constructor(private route: ActivatedRoute) { 
-  }
+  todos: any = {}
+
+  constructor(private route: ActivatedRoute, private todoService: TodoService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
+    this.todos = this.todoService.getAll().subscribe({
+      next: data => {
+        this.todos = data;
+      },
+      error: err => {
+        this.errorMessage = err.error.message;
+        this.toastr.error('Control your credentials!');
+      }
+    });;
   }
-
-  tempFunc = () => {
-    return "abc"
-  }
-
 }

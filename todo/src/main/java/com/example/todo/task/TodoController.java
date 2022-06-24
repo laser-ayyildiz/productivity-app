@@ -30,7 +30,6 @@ import java.util.List;
 @RequestMapping(value = "${api.version}/task")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TodoController {
 
     private final TaskService taskService;
