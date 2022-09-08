@@ -1,0 +1,23 @@
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1:DB_PORT/DB_NAME
+    username: DB_USER
+    password: DB_PASS
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+        globally_quoted_identifiers: true
+api:
+  version: v1
+
+kafka:
+  bootstrapServer:

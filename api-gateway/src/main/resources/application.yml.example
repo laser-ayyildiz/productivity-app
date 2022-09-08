@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+jwt:
+  secret: JWT_SERET
+  expirationMs: 86400000
+
+spring:
+  application:
+    name: productiviyApp-api-gateway
+  datasource:
+    url: jdbc:mysql://localhost:DB_PORT/DB_NAME
+    username: DB_USER
+    password: DB_PASS
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        globally_quoted_identifiers: true
+
+zuul:
+  ignoredServices: "*"
+  routes:
+    user-service:
+      stripPrefix: true
+      serviceId: PRODUCTIVITYAPP-USER-SERVICE
+      path: /user-service/**
+      url: http://localhost:8081/v1/
+    todo-service:
+      stripPrefix: true
+      serviceId: PRODUCTIVITYAPP-TODO-SERVICE
+      path: /todo-service/**
+      url: http://localhost:8082/v1/
+  strip-prefix: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+    fetch-registry: true
